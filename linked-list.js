@@ -5,6 +5,8 @@ class LinkedList {
         this.tail = null;
     }
 
+// remember to use recursion!!!
+
     append(value) {
         const n = new Node(value, nextNode)
         if (this.head === null) {
@@ -60,5 +62,8 @@ class Node {
         this.nextNode = null;
     }
 
+    if (value =! null ) {
+        this.value = value;
+    }
 
 }
