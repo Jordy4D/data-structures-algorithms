@@ -17,40 +17,27 @@ class LinkedList {
 // remember to use recursion!!!
 
 append(value) {
-    const n = new Node(value) // creates new node
-    let current = this.head; // sets current node to head of linked list
-    let next = current.nextNode // sets next to the current node's next node
-    
-    if (this.head === null) {
-      this.head = n
-      next = null
-    } else if (next !== null) {
-      current = next
-    }
-    // if (current.nextNode !== null) {
-    //   current = n.nextNode 
-    // }
+  let newNode = new Node(value); // creates new node
+  // let next = current.nextNode // sets next to the current node's next node
 
-    console.log(n)
-    console.log(this.head)
+  if (!this.head) {
+    this.head = newNode;
+    // console.log(this.head)
+    return;
+  }
 
-    // if (value.nextNode === null) {
-    //    this.head = n
-    // }
+  let current = this.head; // sets current node to head of linked list
 
-    // while (current.nextNode !== null) {
-    //   current = current.nextNode
-    //   console.log(n)
-      
-    // }
+  while (current.nextNode !== null) {
+    // console.log(current.value)
+    current = current.nextNode;
+  }
 
-    // } else {
-    //   this.nextNode = n
-    // } 
+  current.nextNode = newNode;
+  console.log(current);
+  this.length += 1
 
-    
-
-    this.length += 1
+  }
 }
     
     prepend(value) {
