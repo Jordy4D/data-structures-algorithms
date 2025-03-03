@@ -16,44 +16,59 @@ class LinkedList {
 
 // remember to use recursion!!!
 
-append(value) {
-  let newNode = new Node(value); // creates new node
-  // let next = current.nextNode // sets next to the current node's next node
+    append(value) {
+    let newNode = new Node(value); // creates new node
+    // let next = current.nextNode // sets next to the current node's next node
 
-  if (!this.head) {
-    this.head = newNode;
-    // console.log(this.head)
-    return;
-  }
+    if (!this.head) {
+        this.head = newNode;
+        // console.log(this.head)
+        this.length += 1;
+        return;
+    }
 
-  let current = this.head; // sets current node to head of linked list
+    let current = this.head; // sets current node to head of linked list
 
-  while (current.nextNode !== null) {
-    // console.log(current.value)
-    current = current.nextNode;
-  }
+    while (current.nextNode !== null) {
+        // console.log(current.value)
+        current = current.nextNode;
+    }
 
-  current.nextNode = newNode;
-  console.log(current);
-  this.length += 1
+    current.nextNode = newNode;
+    this.tail = newNode
+    console.log(current);
+    this.length += 1
 
-  }
-}
+    }
+
     
     prepend(value) {
+        let newNode = new Node(value)
     
-    }
+        let currentNode = this.head
+    
+        if (this.head === null) {
+            this.head = newNode
+            this.length += 1;
+        } else {
+            this.head = newNode;
+            this.head.nextNode = currentNode;
+            this.length += 1;
+        }
+        console.log(newNode)
+      }
+    
     
     size() {
       console.log(this.length)
     }
     
     head() {
-    
+        console.log(this.head)
     }
     
     tail() {
-    
+        console.log(this.tail)
     }
     
     at(index) {
@@ -74,8 +89,8 @@ append(value) {
     
     toString() {
         let current = this.head
-        while (this.head !== null) {
-          console.log(current)
+        while (current.nextNode !== null) {
+          console.log(`( ${current.value} ) ->`)
           current = current.nextNode
         }
     }
