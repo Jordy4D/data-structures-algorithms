@@ -8,10 +8,10 @@ class Node {
 
 
 class LinkedList {
-    constructor(head = null, tail = null) {
-        this.head = head;
+    constructor(headNode = null, tailNode = null) {
+        this.headNode = headNode;
         this.length = 0;
-        this.tail = tail;
+        this.tailNode = tailNode;
     }
 
 // remember to use recursion!!!
@@ -20,14 +20,14 @@ class LinkedList {
     let newNode = new Node(value); // creates new node
     // let next = current.nextNode // sets next to the current node's next node
 
-    if (!this.head) {
-        this.head = newNode;
-        // console.log(this.head)
+    if (!this.headNode) {
+        this.headNode = newNode;
+        // console.log(this.headNode)
         this.length += 1;
         return;
     }
 
-    let current = this.head; // sets current node to head of linked list
+    let current = this.headNode; // sets current node to headNode of linked list
 
     while (current.nextNode !== null) {
         // console.log(current.value)
@@ -35,7 +35,7 @@ class LinkedList {
     }
 
     current.nextNode = newNode;
-    this.tail = newNode
+    this.tailNode = newNode
     console.log(current);
     this.length += 1
 
@@ -45,14 +45,14 @@ class LinkedList {
     prepend(value) {
         let newNode = new Node(value)
     
-        let currentNode = this.head
+        let currentNode = this.headNode
     
-        if (this.head === null) {
-            this.head = newNode
+        if (this.headNode === null) {
+            this.headNode = newNode
             this.length += 1;
         } else {
-            this.head = newNode;
-            this.head.nextNode = currentNode;
+            this.headNode = newNode;
+            this.headNode.nextNode = currentNode;
             this.length += 1;
         }
         console.log(newNode)
@@ -64,15 +64,15 @@ class LinkedList {
     }
     
     head() {
-        console.log(this.head)
+        console.log(this.headNode)
     }
     
     tail() {
-        console.log(this.tail)
+        console.log(this.tailNode)
     }
     
     at(index) {
-        let currentNode = this.head;
+        let currentNode = this.headNode;
 
         for (let x = 0 ; x <= index ; x++) {
             currentNode = currentNode.nextNode;
@@ -94,7 +94,7 @@ class LinkedList {
     }
     
     toString() {
-        let current = this.head
+        let current = this.headNode
         while (current.nextNode !== null) {
           console.log(`( ${current.value} ) ->`)
           current = current.nextNode
