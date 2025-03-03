@@ -72,7 +72,13 @@ class LinkedList {
     }
     
     at(index) {
-    
+        let currentNode = this.head;
+
+        for (let x = 0 ; x <= index ; x++) {
+            currentNode = currentNode.nextNode;
+        }
+
+        console.log(currentNode.value)
     }
     
     pop() {
