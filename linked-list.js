@@ -73,8 +73,9 @@ class LinkedList {
     
     at(index) {
         let currentNode = this.headNode;
+        console.log(`at(index) headnode value is: ${currentNode.value}`) // checks for prepended headNode
 
-        for (let x = 0 ; x <= index ; x++) {
+        for (let x = 0 ; x < index ; x++) {
             currentNode = currentNode.nextNode;
         }
 
@@ -90,9 +91,26 @@ class LinkedList {
     }
     
     find(value) {
-    
+        let index = 0
+        let current = this.headNode; // sets current node to headNode of linked list
+        // let finding = value;
+
+        while (current.nextNode !== null) {
+            // console.log(current.value)
+            if (current.value === value) {
+                return console.log(index)
+              
+            } 
+            current = current.nextNode;
+            index += 1;
+
+            if (current.nextNode === null) {
+                return console.log("null")
+            }
+        }
     }
     
+    // not done yet
     toString() {
         let current = this.headNode
         while (current.nextNode !== null) {
@@ -111,8 +129,13 @@ list.append("parrot");
 list.append("hamster");
 list.append("snake");
 list.append("turtle");
+list.prepend("fox")
+
 
 console.log(list)
 
+list.at(0)
+
 console.log(list.size());
 console.log(list.toString());
+list.find("fox")
