@@ -83,28 +83,35 @@ class LinkedList {
     }
     
     pop() {
+        let current = this.headNode; // sets current node to headNode of linked list
+        // let finding = value;
     
+        while (current.nextNode !== null) {
+    
+          current = current.nextNode;
+    
+        }
+    
+        current = null
     }
     
     contains(value) {
-
         let current = this.headNode; // sets current node to headNode of linked list
         // let finding = value;
-
+    
         while (current.nextNode !== null) {
-            // console.log(current.value)
-            if (current.value === value) {
-                return console.log(true)
-              
-            } 
-            current = current.nextNode;
-
-            if (current.nextNode === null) {
-                return console.log(false)
-            }
+          // console.log(current.value)
+          if (current.value === value || current.nextNode.value === value) {
+            return console.log(true);
+          }
+    
+          current = current.nextNode;
     
         }
-    }
+    
+        console.log(false)
+    
+      }
     
     find(value) {
         let index = 0
@@ -133,6 +140,8 @@ class LinkedList {
           console.log(`( ${current.value} ) ->`)
           current = current.nextNode
         }
+        console.log(`( ${current.value} ) ->`);
+
     }
 
 }
