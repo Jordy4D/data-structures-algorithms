@@ -14,23 +14,19 @@ class LinkedList {
         this.tailNode = tailNode;
     }
 
-// remember to use recursion!!!
 
     append(value) {
-    let newNode = new Node(value); // creates new node
-    // let next = current.nextNode // sets next to the current node's next node
+    let newNode = new Node(value); 
 
     if (!this.headNode) {
         this.headNode = newNode;
-        // console.log(this.headNode)
         this.length += 1;
         return;
     }
 
-    let current = this.headNode; // sets current node to headNode of linked list
+    let current = this.headNode; 
 
     while (current.nextNode !== null) {
-        // console.log(current.value)
         current = current.nextNode;
     }
 
@@ -73,7 +69,7 @@ class LinkedList {
     
     at(index) {
         let currentNode = this.headNode;
-        console.log(`at(index) headnode value is: ${currentNode.value}`) // checks for prepended headNode
+        console.log(`at(index) headnode value is: ${currentNode.value}`)
 
         for (let x = 0 ; x < index ; x++) {
             currentNode = currentNode.nextNode;
@@ -102,8 +98,7 @@ class LinkedList {
     }
     
     contains(value) {
-        let current = this.headNode; // sets current node to headNode of linked list
-        // let finding = value;
+        let current = this.headNode; 
     
         while (current.nextNode !== null) {
           // console.log(current.value)
@@ -121,8 +116,7 @@ class LinkedList {
     
     find(value) {
         let index = 0
-        let current = this.headNode; // sets current node to headNode of linked list
-        // let finding = value;
+        let current = this.headNode;
 
         while (current.nextNode !== null) {
             // console.log(current.value)
@@ -139,7 +133,6 @@ class LinkedList {
         }
     }
     
-    // not done yet
     toString() {
         let current = this.headNode;
         let strArr = []
@@ -167,8 +160,6 @@ list.prepend("fox")
 
 console.log(list)
 
-list.at(0)
 
-console.log(list.size());
+console.log(`List length is: ${list.size()}`);
 console.log(list.toString());
-list.find("fox")
