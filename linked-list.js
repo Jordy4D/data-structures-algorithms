@@ -83,16 +83,22 @@ class LinkedList {
     }
     
     pop() {
-        let current = this.headNode; // sets current node to headNode of linked list
-        // let finding = value;
+        let current = this.headNode
     
-        while (current.nextNode !== null) {
-    
-          current = current.nextNode;
-    
+        if (current === null) {
+          return console.log("No nodes to remove")
+        } else if (current.nextNode === null) {
+          this.headNode = null
         }
     
-        current = null
+        while (current.nextNode.nextNode !== null) {
+          current = current.nextNode;
+        }
+    
+        current.nextNode = null;
+        this.tailNode = current;
+        this.length -= 1
+    
     }
     
     contains(value) {
