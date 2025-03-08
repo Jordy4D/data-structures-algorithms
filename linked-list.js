@@ -141,14 +141,16 @@ class LinkedList {
     
     // not done yet
     toString() {
-        let current = this.headNode
+        let current = this.headNode;
+        let strArr = []
         while (current.nextNode !== null) {
-          console.log(`( ${current.value} ) ->`)
-          current = current.nextNode
+          strArr.push(`( ${current.value} ) ->`)
+          current = current.nextNode;
         }
-        console.log(`( ${current.value} ) ->`);
-
-    }
+        strArr.push(`( ${current.value} ) ->`)
+        strArr.push(`( ${current.nextNode} )`)
+        console.log(strArr.join(" "))
+      }
 
 }
 
