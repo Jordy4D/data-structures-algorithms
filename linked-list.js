@@ -56,15 +56,15 @@ class LinkedList {
     
     
     size() {
-      console.log(this.length)
+      return this.length
     }
     
     head() {
-        console.log(this.headNode)
+        this.headNode
     }
     
     tail() {
-        console.log(this.tailNode)
+        this.tailNode
     }
     
     at(index) {
