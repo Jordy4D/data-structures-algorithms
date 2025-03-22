@@ -1,7 +1,9 @@
 class HashMap {
-    constructor(loadFactor = 0.75, capacity) {
+    constructor(loadFactor = 0.75, capacity = 16) {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
+        this.buckets = new Array();
+        this.size = 0;
     }
 
     hash(key) {
@@ -16,6 +18,11 @@ class HashMap {
     }
 
     set(key, value) {
+        let k = hash(key);
+        let v = hash(value)
+
+        console.log(`the value of key is ${k}`)
+        console.log(`the value of value is ${v}`)
 
     }
 
