@@ -2,8 +2,7 @@ class HashMap {
     constructor(loadFactor = 0.75, capacity = 16) {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
-        this.buckets = new Array();
-        this.size = 0;
+        this.buckets = new Array(capacity);
     }
 
     hash(key) {
@@ -18,18 +17,25 @@ class HashMap {
     }
 
     set(key, value) {
-        let k = hash(key);
-        let v = hash(value)
+        let index = this.hash(key);
 
-        console.log(`the value of key is ${k}`)
-        console.log(`the value of value is ${v}`)
+        if (!this.buckets[index]) {
+            this.buckets[index] = [];
+        }
+
+        this.buckets[index].push([key, value])
+
 
     }
 
     // takes one argument as a key and returns the value that is assigned to this key.
     // If a key is not found, return null.
     get(key) {
+        let index = this.hash(key)
 
+        if (this.buckets[index] === true) {
+            console.log `${this.buckets[index].value}`
+        }
     }
     
 
