@@ -33,8 +33,14 @@ class HashMap {
     get(key) {
         let index = this.hash(key)
 
-        if (this.buckets[index] === true) {
-            console.log `${this.buckets[index].value}`
+        if (!this.buckets[index]) {
+            return null
+        }
+
+        for (let bucket of this.buckets[index]) {
+            if (bucket[0] === key) {
+                return bucket[1]
+            }
         }
     }
     
@@ -42,14 +48,36 @@ class HashMap {
     // takes a key as an argument and returns true or false based on 
     // whether or not the key is in the hash map.
     has(key) {
+        let index = this.hash(key)
 
+        if (!this.buckets[index]) {
+            return false
+        } else {
+            return true
+        }
     }
     
     
     // takes a key as an argument. If the given key is in the hash map, it should remove 
     // the entry with that key and return true. If the key isn’t in the hash map, it should return false.
     remove(key) {
+        let index = this.hash(key)
 
+        if (!this.buckets[index]) {
+            return false
+        } 
+        // else {
+        //     this.buckets[index]
+        // }
+
+        for (let bucket of this.buckets[index]) {
+            if (bucket[0] === key) {
+                // let value = this.buckets[index].indexOf(bucket)
+                // this.buckets[index].splice(value)
+                this.buckets[index] = null
+                return true
+            }
+        }
     }
     
     
