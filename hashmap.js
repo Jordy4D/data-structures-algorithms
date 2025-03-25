@@ -3,7 +3,7 @@ class HashMap {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
         this.buckets = new Array(capacity);
-        this.length = 0;
+        this.hashLength = 0;
     }
 
     hash(key) {
@@ -25,7 +25,7 @@ class HashMap {
         }
 
         this.buckets[index].push([key, value])
-        this.length += 1;
+        this.hashLength += 1;
 
 
     }
@@ -77,7 +77,7 @@ class HashMap {
                 // let value = this.buckets[index].indexOf(bucket)
                 // this.buckets[index].splice(value)
                 this.buckets[index] = null
-                this.length -= 1;
+                this.hashLength -= 1;
                 return true
             }
         }
@@ -87,25 +87,32 @@ class HashMap {
     // returns the number of stored keys in the hash map.
     // doesn't work with (), need to correct.
     length() {
-        return this.length
+        return this.hashLength
     }
     
     
     // removes all entries in the hash map.
-    // not done yet
+
     clear() {
-        for (let bucket of this.buckets) {
-            if (bucket === true) {
-                this.length -= 1
-                this.buckets[bucket] = null
-            }
-        }
+        
+        this.buckets = new Array(this.capacity);
+        this.hashLength = 0;
+    
     }
     
     
     // returns an array containing all the keys inside the hash map.
     keys() {
 
+        let keyArr = [];
+
+        for (let bucket of this.buckets) {
+            if (typeof bucket === object) {
+                keyArr.push(bucket[0])
+            }
+        }
+
+        return keyArr;
     }
     
     
