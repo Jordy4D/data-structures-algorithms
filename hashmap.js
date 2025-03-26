@@ -1,6 +1,6 @@
 class HashMap {
-    constructor(loadFactor = 0.75, capacity = 16) {
-        this.loadFactor = loadFactor;
+    constructor(capacity = 16) {
+        this.loadFactor = 0.75;
         this.capacity = capacity;
         this.buckets = new Array(capacity);
         this.hashLength = 0;
@@ -18,27 +18,35 @@ class HashMap {
     }
 
     set(key, value) {
-        let index = this.hash(key);
+        let index = this.hash(key) % this.capacity;
         
         if (!this.buckets[index]) {
             this.buckets[index] = [];
+            this.hashLength += 1;
+            this.buckets[index].push([key, value])
         }
         
-        // if (this.buckets[index][0][0] === key.toString()) {
+        // probably need to do a for loop to search for any keys in index that match
+        // before trying to replace the value of said key
+
+        // if (test.buckets[index][0].includes(key)) {
         //     this.buckets[index][0] = [key, value]
-        // }
-
-
-        this.buckets[index].push([key, value])
-        this.hashLength += 1;
-
+        //     this.hashLength += 1;
+        //     return this.buckets[index].push([key, value])
+        // } 
+        
+        if ((this.hashLength/this.capacity) === this.loadFactor) {
+            let newBucket = new Array(capacity)
+            this.buckets.concat(newBucket)
+            this.capacity *= 2
+        }
 
     }
 
     // takes one argument as a key and returns the value that is assigned to this key.
     // If a key is not found, return null.
     get(key) {
-        let index = this.hash(key)
+        let index = this.hash(key) % this.capacity;
 
         if (index < 0 || index >= this.buckets.length) {
             throw new Error("Trying to access index out of bounds");
@@ -60,7 +68,7 @@ class HashMap {
     // takes a key as an argument and returns true or false based on 
     // whether or not the key is in the hash map.
     has(key) {
-        let index = this.hash(key)
+        let index = this.hash(key) % this.capacity;
 
         if (index < 0 || index >= buckets.length) {
             throw new Error("Trying to access index out of bounds");
@@ -78,9 +86,9 @@ class HashMap {
     // takes a key as an argument. If the given key is in the hash map, it should remove 
     // the entry with that key and return true. If the key isn’t in the hash map, it should return false.
     remove(key) {
-        let index = this.hash(key)
+        let index = this.hash(key) % this.capacity;
 
-        if (index < 0 || index >= buckets.length) {
+        if (index < 0 || index >= this.buckets.length) {
             throw new Error("Trying to access index out of bounds");
           }
           
@@ -127,8 +135,8 @@ class HashMap {
         let keyArr = [];
 
         for (let bucket of this.buckets) {
-            if (typeof bucket === Object) {
-                keyArr.push(bucket[0])
+            if (bucket !== undefined ) {
+                keyArr.push(bucket[0][0])
             }
         }
 
@@ -138,14 +146,32 @@ class HashMap {
     
     // returns an array containing all the values.
     values() {
+        let keyArr = [];
 
+        for (let bucket of this.buckets) {
+            if (bucket !== undefined ) {
+                keyArr.push(bucket[0][1])
+            }
+        }
+
+        return keyArr;
     }
     
     
     // returns an array that contains each key, value pair.
     //  Example: [[firstKey, firstValue], [secondKey, secondValue]]
     entries() {
+        let keyArr = [];
 
+        for (let bucket of this.buckets) {
+            if (bucket !== undefined ) {
+          
+                keyArr.push(bucket[0])
+
+            }
+        }
+
+        return keyArr;
     }
     
     
