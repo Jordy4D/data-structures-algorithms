@@ -19,10 +19,15 @@ class HashMap {
 
     set(key, value) {
         let index = this.hash(key);
-
+        
         if (!this.buckets[index]) {
             this.buckets[index] = [];
         }
+        
+        // if (this.buckets[index][0][0] === key.toString()) {
+        //     this.buckets[index][0] = [key, value]
+        // }
+
 
         this.buckets[index].push([key, value])
         this.hashLength += 1;
@@ -34,6 +39,11 @@ class HashMap {
     // If a key is not found, return null.
     get(key) {
         let index = this.hash(key)
+
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+          }
+          
 
         if (!this.buckets[index]) {
             return null
@@ -52,6 +62,11 @@ class HashMap {
     has(key) {
         let index = this.hash(key)
 
+        if (index < 0 || index >= buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+          }
+          
+
         if (!this.buckets[index]) {
             return false
         } else {
@@ -64,6 +79,11 @@ class HashMap {
     // the entry with that key and return true. If the key isn’t in the hash map, it should return false.
     remove(key) {
         let index = this.hash(key)
+
+        if (index < 0 || index >= buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+          }
+          
 
         if (!this.buckets[index]) {
             return false
@@ -107,7 +127,7 @@ class HashMap {
         let keyArr = [];
 
         for (let bucket of this.buckets) {
-            if (typeof bucket === object) {
+            if (typeof bucket === Object) {
                 keyArr.push(bucket[0])
             }
         }
