@@ -19,12 +19,38 @@ class HashMap {
 
     set(key, value) {
         let index = this.hash(key) % this.capacity;
-        
+        let load = (this.hashLength/this.capacity)
+        console.log(load)
+
+        if (this.buckets[index] !== undefined) {
+            
+            // for (let indexKey of this.buckets[index]) {
+            //     if (this.buckets[index][indexKey][0] === key) {
+            //         this.buckets[index][indexKey] = [key, value]
+            //     } 
+                
+            //     return
+
+            // }
+
+            this.buckets[index].push([key, value])
+            this.hashLength += 1;
+            
+            // let current = this.buckets[index][0]
+
+            // while (currentNode.nextNode === null) {
+            //     current = current.nextNode
+            // }
+
+
+        }
+
         if (!this.buckets[index]) {
             this.buckets[index] = [];
-            this.hashLength += 1;
             this.buckets[index].push([key, value])
+            this.hashLength += 1;
         }
+
         
         // probably need to do a for loop to search for any keys in index that match
         // before trying to replace the value of said key
@@ -35,7 +61,7 @@ class HashMap {
         //     return this.buckets[index].push([key, value])
         // } 
         
-        if ((this.hashLength/this.capacity) === this.loadFactor) {
+        if ((this.hashLength / this.capacity) === this.loadFactor) {
             let newBucket = new Array(capacity)
             this.buckets.concat(newBucket)
             this.capacity *= 2
@@ -165,8 +191,10 @@ class HashMap {
 
         for (let bucket of this.buckets) {
             if (bucket !== undefined ) {
-          
-                keyArr.push(bucket[0])
+                for (let i = 0; i < bucket.length; i++) {
+                    keyArr.push(bucket[i])
+
+                }
 
             }
         }
