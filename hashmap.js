@@ -32,17 +32,15 @@ class HashMap {
 
         if (this.buckets[index] !== undefined ) {
             
-            for (let i = 0; i <= bucket.length; i++) {
+            for (let i = 0; i < bucket.length; i++) {
                 if (bucket[i][0] === key) {
-                    bucket[i][0] = key;
                     bucket[i][1] = value;
                     return;
-                }
-                
+                } 
+                this.buckets[index].push([key, value])
+                this.hashLength += 1;
             }
             
-            this.buckets[index].push([key, value])
-            this.hashLength += 1;
 
         }
 
@@ -54,34 +52,34 @@ class HashMap {
         
         
        
-        let load = (this.hashLength/this.capacity)
-        console.log(load)
+        // let load = (this.hashLength/this.capacity)
+        // console.log(load)
         
-        if (load === this.loadFactor) {
+        if ( this.length() === this.loadFactor * this.capacity) {
             this._resize()
             console.log('load capacity reached')
             
             
         }
             
-        }
+    }
         
-        _resize() {
-            const oldBuckets = this.buckets;
-            console.log(oldBuckets)
-            console.log(oldBuckets[1])
-            
-            this.capacity *= 2
-            this.buckets = new Array(this.capacity).fill(null).map(() => [])
-            this.hashLength = 0
-            
-            
-            for (const bucket of oldBuckets) {
-                if (!bucket) continue; 
-                for (const [key, value] of bucket) {
-                    this.set(key, value);
-                }
+    _resize() {
+        const oldBuckets = this.buckets;
+        console.log(oldBuckets)
+        console.log(oldBuckets[1])
+        
+        this.capacity *= 2
+        this.buckets = new Array(this.capacity).fill(null).map(() => [])
+        this.hashLength = 0
+        
+        
+        for (const bucket of oldBuckets) {
+            if (!bucket) continue; 
+            for (let [key, value] of bucket) {
+                this.set(key, value);
             }
+        }
 
             
 
