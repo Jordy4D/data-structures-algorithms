@@ -1,3 +1,12 @@
+class Node {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.nextNode = null;
+    }
+
+}
+
 class HashMap {
     constructor(capacity = 16) {
         this.loadFactor = 0.75;
@@ -19,12 +28,21 @@ class HashMap {
 
     set(key, value) {
         let index = this.hash(key) % this.capacity;
-        
-        if (this.buckets[index] !== undefined) {
+        let bucket = this.buckets[index]
+
+        if (this.buckets[index] !== undefined ) {
+            
+            for (let i = 0; i <= bucket.length; i++) {
+                if (bucket[i][0] === key) {
+                    bucket[i][0] = key;
+                    bucket[i][1] = value;
+                    return;
+                }
+                
+            }
             
             this.buckets[index].push([key, value])
             this.hashLength += 1;
-
 
         }
 
@@ -35,38 +53,37 @@ class HashMap {
         }
         
         
-        // probably need to do a for loop to search for any keys in index that match
-        // before trying to replace the value of said key
+       
+        let load = (this.hashLength/this.capacity)
+        console.log(load)
         
-        // if (test.buckets[index][0].includes(key)) {
-            //     this.buckets[index][0] = [key, value]
-            //     this.hashLength += 1;
-            //     return this.buckets[index].push([key, value])
-            // } 
-            let load = (this.hashLength/this.capacity)
-            console.log(load)
+        if (load === this.loadFactor) {
+            this._resize()
+            console.log('load capacity reached')
             
-            if (load === this.loadFactor) {
-                this._resize()
-                console.log('load capacity reached')
-                
-                
-            }
+            
+        }
             
         }
         
         _resize() {
             const oldBuckets = this.buckets;
-            console.log(oldBuckets[0])
+            console.log(oldBuckets)
+            console.log(oldBuckets[1])
+            
             this.capacity *= 2
             this.buckets = new Array(this.capacity).fill(null).map(() => [])
             this.hashLength = 0
             
-            for (let i = 0; i < oldBuckets.length; i++) {
+            
+            for (const bucket of oldBuckets) {
+                if (!bucket) continue; 
                 for (const [key, value] of bucket) {
-                    this.set(key, value)
+                    this.set(key, value);
                 }
             }
+
+            
 
     }
 
