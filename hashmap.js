@@ -37,17 +37,17 @@ class HashMap {
                     bucket[i][1] = value;
                     return;
                 } 
-                this.buckets[index].push([key, value])
-                this.hashLength += 1;
             }
             
+            this.hashLength += 1;
+            this.buckets[index].push([key, value])
 
         }
 
         if (!this.buckets[index]) {
+            this.hashLength += 1;
             this.buckets[index] = [];
             this.buckets[index].push([key, value])
-            this.hashLength += 1;
         }
         
         
@@ -55,7 +55,9 @@ class HashMap {
         // let load = (this.hashLength/this.capacity)
         // console.log(load)
         
-        if ( this.length() === this.loadFactor * this.capacity) {
+
+
+        if ( (this.hashLength / this.capacity) >= this.loadFactor) {
             this._resize()
             console.log('load capacity reached')
             
@@ -66,11 +68,9 @@ class HashMap {
         
     _resize() {
         const oldBuckets = this.buckets;
-        console.log(oldBuckets)
-        console.log(oldBuckets[1])
         
         this.capacity *= 2
-        this.buckets = new Array(this.capacity).fill(null).map(() => [])
+        this.buckets = new Array(this.capacity)
         this.hashLength = 0
         
         
@@ -80,9 +80,6 @@ class HashMap {
                 this.set(key, value);
             }
         }
-
-            
-
     }
 
     // takes one argument as a key and returns the value that is assigned to this key.
@@ -226,3 +223,18 @@ class HashMap {
     
 
 }
+
+const test = new HashMap()
+
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
