@@ -11,23 +11,32 @@ class Tree {
         this.root = null;
     }
 
-    buildTree(array) {
+    buildTree(array, start = 0, end = 0) {
         const newArray = array;
-        // this.root = new Node(array[0])
-        
-        // console.log(newArray)
         
         const cleanArray = this._sortAndDedupe(array)
         
-        const start = 0
-        const end = cleanArray.length - 1
+        // start = 0
+        end = cleanArray.length - 1
+        const mid = (start + end) / 2
         
+        if (start > end) {
+            return null;
+        }
+
+        this.root = new Node(cleanArray[mid])
+
+        this.root.left = buildTree(array, start, mid-1)
+        this.root.right = buildTree(array, mid+1, end)
         
-        
-        
+        console.log(this.root)        
         console.log(newArray)
         console.log(cleanArray)
-        console.log(start, end)
+        console.log(cleanArray[mid])
+        
+        
+        return this.root
+
 
         
 
