@@ -11,55 +11,40 @@ class Tree {
         this.root = null;
     }
 
-    buildTree(array, start = 0, end = 0) {
-        const newArray = array;
+    buildTree(array, start = 0, end = array.length - 1) {
+        // const newArray = array;
         
-        const cleanArray = this._sortAndDedupe(array)
+        // const cleanArray = this._sortAndDedupe(array)
         
         // start = 0
-        end = cleanArray.length - 1
-        const mid = (start + end) / 2
-        
-        if (start > end) {
+        // end = cleanArray.length - 1
+        if (!array || start > end) {
             return null;
         }
 
-        this.root = new Node(cleanArray[mid])
-
-        this.root.left = buildTree(array, start, mid-1)
-        this.root.right = buildTree(array, mid+1, end)
-        
-        console.log(this.root)        
-        console.log(newArray)
-        console.log(cleanArray)
-        console.log(cleanArray[mid])
-        
-        
-        return this.root
-
-
+        const mid = Math.floor((start + end) / 2)
+        const node = new Node(array[mid])
         
 
 
-            // while (current > next) {
-            //     let temp = current
-            //     newArray[x] = next
-            //     newArray[x+1] = temp
-            //     console.log(`Swap! ${current} and ${next} were swapped`)
 
-            // }
 
-            // if (current > next) {
-            // } else {
-
-            // }
-
-            
-        // }
-        // console.log(array)
+        node.left = this.buildTree(array, start, mid - 1)
+        node.right = this.buildTree(array, mid + 1, end)
+        
+        // console.log(this.root)        
         // console.log(newArray)
-        // console.log(sortedArray)
+        // console.log(cleanArray)
+        // console.log(cleanArray[mid])
+        
+        
+        return node
 
+
+    }
+
+    callTreeFunc(array) {
+        this.root = this.buildTree(array)
     }
 
     _sortAndDedupe(array) {
