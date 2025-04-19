@@ -155,8 +155,49 @@ class Tree {
         return this.root;
     }
     
-    levelOrder(callback) {
-        
+    levelOrder(callback = null) {
+        if (this.root === null) {
+            return []; 
+        }
+
+        const queue = [this.root];
+        const results = []
+
+        while (queue.length > 0) {
+            const node = queue.shift()
+
+            if (!callback) {
+                throw Error("no callback function called")
+            }
+
+            if (callback) {
+                callback(node)
+            } 
+            
+            results.push(node)
+
+            if (node.left) {
+                queue.push(node.left)
+            }
+            if (node.right) {
+                queue.push(node.right)
+            }
+        }
+        return results;
+
+    }
+
+
+    preOrder(root) {
+        if (root === null) {
+            return; 
+        }
+
+        console.log(root)
+
+        this.preOrder(root.left)
+        this.preOrder(root.right)
+
     }
 
     
@@ -190,3 +231,7 @@ prettyPrint(test.root)
 test.delete(test.root, 23)
 prettyPrint(test.root)
 console.log(test.find(test.root, 5))
+
+
+// test.levelOrder(node => console.log("Visiting:", node.value))
+test.preOrder(node => console.log('Visiting:', node.value))
