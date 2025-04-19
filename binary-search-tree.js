@@ -32,11 +32,19 @@ class Tree {
         node.left = this.buildTree(array, start, mid - 1)
         node.right = this.buildTree(array, mid + 1, end)
         
-        // console.log(this.root)        
-        // console.log(newArray)
+
+        // console.log(node.left)
+        // console.log(node.right)
+        // console.log(node.left)        
+        // console.log(node.right)
         // console.log(cleanArray)
         // console.log(cleanArray[mid])
         
+
+        
+
+        // prettyPrint(node.left)  
+
         
         return node
 
@@ -69,9 +77,28 @@ class Tree {
 
     }
 
-
+    
 }
 
-const test = new Tree()
+function prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+};
 
-test.buildTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+
+const test = new Tree()
+const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+const sortedArr = test._sortAndDedupe(arr)
+
+
+
+test.root = test.buildTree(sortedArr) 
+prettyPrint(test.root)
