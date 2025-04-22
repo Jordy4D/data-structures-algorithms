@@ -12,12 +12,7 @@ class Tree {
     }
 
     buildTree(array, start, end) {
-        // const newArray = array;
-        
-        // const cleanArray = this._sortAndDedupe(array)
-        
-        // start = 0
-        // end = cleanArray.length - 1
+       
         if (!array || start > end) {
             return null;
         }
@@ -33,19 +28,7 @@ class Tree {
         node.right = this.buildTree(array, mid + 1, end)
         
 
-        // console.log(node.left)
-        // console.log(node.right)
-        // console.log(node.left)        
-        // console.log(node.right)
-        // console.log(cleanArray)
-        // console.log(cleanArray[mid])
-        
-
-        
-
-        // prettyPrint(node.left)  
-
-        
+              
         return node
 
 
@@ -136,6 +119,7 @@ class Tree {
         return root
     }
 
+    //refactor, works but not by the directions
     find(root, value) {
         if (root === null) {
             return null
@@ -257,11 +241,20 @@ class Tree {
 
 
     height(value) {
+        const node = this.root
+        
+        
+
         if (!value) {
             return null;
         }
 
-        
+        // const branch = this.find(this.root, value)
+
+        // console.log(branch.value)
+
+
+
 
     }
 
@@ -299,8 +292,9 @@ console.log(test.find(test.root, 5))
 
 
 // test.levelOrder(node => console.log("Visiting:", node.value))
-test.preOrder(node => console.log('Visiting preOrder:', node.value))
-test.inOrder(node => console.log('Visiting inOrder:', node.value))
-test.postOrder(node => console.log('Visiting postOrder:', node.value))
+// test.preOrder(node => console.log('Visiting preOrder:', node.value))
+// test.inOrder(node => console.log('Visiting inOrder:', node.value))
+// test.postOrder(node => console.log('Visiting postOrder:', node.value))
 
+test.height(30)
 // 
