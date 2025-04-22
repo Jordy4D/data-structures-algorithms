@@ -254,6 +254,17 @@ class Tree {
         traverse(this.root)
 
     }
+
+
+    height(value) {
+        if (!value) {
+            return null;
+        }
+
+        
+
+    }
+
     
 }
 
