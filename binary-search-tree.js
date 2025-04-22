@@ -188,18 +188,72 @@ class Tree {
     }
 
 
-    preOrder(root) {
-        if (root === null) {
-            return; 
+    preOrder(callback = null) {
+        
+        const traverse = (node) => {
+            if (node === null) {
+                return; 
+            }
+
+            callback(node)
+            traverse(node.left)
+            traverse(node.right)
         }
 
-        console.log(root)
 
-        this.preOrder(root.left)
-        this.preOrder(root.right)
+        if (!callback) {
+            throw Error('No Callback Provided')
+        }
+
+
+        traverse(this.root)
 
     }
 
+    inOrder(callback = null) {
+        
+        const traverse = (node) => {
+            if (node === null) {
+                return; 
+            }
+
+            traverse(node.left)
+            callback(node)
+            traverse(node.right)
+        }
+
+
+        if (!callback) {
+            throw Error('No Callback Provided')
+        }
+
+
+        traverse(this.root)
+
+    }
+
+    postOrder(callback = null) {
+        
+        const traverse = (node) => {
+            if (node === null) {
+                return; 
+            }
+
+            traverse(node.left)
+            traverse(node.right)
+            // console.log("the current postOrder node is", node.value)
+            callback(node)
+        }
+
+
+        if (!callback) {
+            throw Error('No Callback Provided')
+        }
+
+
+        traverse(this.root)
+
+    }
     
 }
 
@@ -234,4 +288,8 @@ console.log(test.find(test.root, 5))
 
 
 // test.levelOrder(node => console.log("Visiting:", node.value))
-test.preOrder(node => console.log('Visiting:', node.value))
+test.preOrder(node => console.log('Visiting preOrder:', node.value))
+test.inOrder(node => console.log('Visiting inOrder:', node.value))
+test.postOrder(node => console.log('Visiting postOrder:', node.value))
+
+// 
