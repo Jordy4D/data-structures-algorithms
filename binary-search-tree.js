@@ -120,25 +120,47 @@ class Tree {
     }
 
     //refactor, works but not by the directions
-    find(root, value) {
-        if (root === null) {
-            return null
-        }
+    // find(root, value) {
+    //     if (root === null) {
+    //         return null
+    //     }
 
-        if (root.value === value ) {
-            return root
-        }
+    //     if (root.value === value ) {
+    //         return root
+    //     }
 
-        if (root.value > value) {
-            return this.find(root.left, value)
-        } else if (root.value < value) {
-            return this.find(root.right, value)
-        } 
+    //     if (root.value > value) {
+    //         return this.find(root.left, value)
+    //     } else if (root.value < value) {
+    //         return this.find(root.right, value)
+    //     } 
 
-        // console.log(root)
-        return this.root;
-    }
+    //     // console.log(root)
+    //     return this.root;
+    // }
     
+    find(value) {
+        
+        const search = (node) => {
+            if (node === null) {
+                return null
+            }
+
+            if (node.value === value ) {
+                return node
+            } else if (value < node.value) {
+                return search(node.left)
+            } else {
+                return search(node.right) 
+            }
+
+        }
+
+        return search(this.root);
+    }
+
+
+
     levelOrder(callback = null) {
         if (this.root === null) {
             return []; 
@@ -241,9 +263,26 @@ class Tree {
 
 
     height(value) {
-        const node = this.root
-        
-        
+        const node = this.find(this.root, value)
+        let height = 0;
+
+        console.log(node)
+
+
+        if (node.value > node.left.value) {
+            return this.height(node.right)
+        } else if (root.value < value) {
+            return this.find(root.right, value)
+        } 
+
+        while (node.left !== null && node.right !== null) {
+            if ( node.value.left !== null) {
+                console.log(node)
+            }
+
+
+        }
+
 
         if (!value) {
             return null;
@@ -288,7 +327,7 @@ test.insert(test.root, 30)
 prettyPrint(test.root)
 test.delete(test.root, 23)
 prettyPrint(test.root)
-console.log(test.find(test.root, 5))
+console.log(test.find(5))
 
 
 // test.levelOrder(node => console.log("Visiting:", node.value))
@@ -296,5 +335,5 @@ console.log(test.find(test.root, 5))
 // test.inOrder(node => console.log('Visiting inOrder:', node.value))
 // test.postOrder(node => console.log('Visiting postOrder:', node.value))
 
-test.height(30)
+// test.height(30)
 // 
