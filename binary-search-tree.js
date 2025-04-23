@@ -119,25 +119,7 @@ class Tree {
         return root
     }
 
-    //refactor, works but not by the directions
-    // find(root, value) {
-    //     if (root === null) {
-    //         return null
-    //     }
 
-    //     if (root.value === value ) {
-    //         return root
-    //     }
-
-    //     if (root.value > value) {
-    //         return this.find(root.left, value)
-    //     } else if (root.value < value) {
-    //         return this.find(root.right, value)
-    //     } 
-
-    //     // console.log(root)
-    //     return this.root;
-    // }
     
     find(value) {
         
@@ -263,35 +245,48 @@ class Tree {
 
 
     height(value) {
-        const node = this.find(this.root, value)
-        let height = 0;
-
-        console.log(node)
-
-
-        if (node.value > node.left.value) {
-            return this.height(node.right)
-        } else if (root.value < value) {
-            return this.find(root.right, value)
-        } 
-
-        while (node.left !== null && node.right !== null) {
-            if ( node.value.left !== null) {
-                console.log(node)
-            }
-
-
-        }
-
-
-        if (!value) {
+        const node = this.find(value);
+        if (node === null) {
             return null;
         }
 
-        // const branch = this.find(this.root, value)
+        const calcHeight = (node) => {
+            if (node === null) {
+                return -1;
+            } 
 
-        // console.log(branch.value)
+            const leftHeight = calcHeight(node.left);
+            const rightHeight = calcHeight(node.right);
+            
+            return Math.max(leftHeight, rightHeight) + 1;
+        };
+    
+        return calcHeight(node);
 
+
+
+    }
+
+    // working on it
+    depth(value) {
+        const node = this.find(value);
+        const root = this.root
+        if (node === null) {
+            return null;
+        }
+        
+        const calcDepth = (node) => {
+            if (node === null) {
+                return -1;
+            } 
+
+            const leftDepth = calcDepth(node.left);
+            const rightDepth = calcDepth(node.right);
+            
+            return Math.max(leftDepth, rightDepth) + 1;
+        };
+    
+        return calcHeight(node);
 
 
 
@@ -327,7 +322,7 @@ test.insert(test.root, 30)
 prettyPrint(test.root)
 test.delete(test.root, 23)
 prettyPrint(test.root)
-console.log(test.find(5))
+// console.log(test.find(5))
 
 
 // test.levelOrder(node => console.log("Visiting:", node.value))
@@ -335,5 +330,5 @@ console.log(test.find(5))
 // test.inOrder(node => console.log('Visiting inOrder:', node.value))
 // test.postOrder(node => console.log('Visiting postOrder:', node.value))
 
-// test.height(30)
+console.log(test.height(67))
 // 
