@@ -269,27 +269,37 @@ class Tree {
 
     // working on it
     depth(value) {
-        const node = this.find(value);
-        const root = this.root
-        if (node === null) {
-            return null;
-        }
         
-        const calcDepth = (node) => {
-            if (node === null) {
-                return -1;
-            } 
+        let depthLeft = 0;
+        let depthRight = 0;
 
-            const leftDepth = calcDepth(node.left);
-            const rightDepth = calcDepth(node.right);
+        if (value === null) {
+            return 0;
+        } else if ()
+
+        
+        // const node = this.root;
+        // const find = this.find(value)
+        // if (node === null) {
+        //     return null;
+        // }
+        
+        // const calcDepth = (node) => {
+        //     if (node === null) {
+        //         return -1;
+        //     } 
+
+        //     if (find === node) {
+        //         return + 1;
+        //     }
+
+        //     const rightDepth = calcDepth(node.right);
+        //     const leftDepth = calcDepth(node.left);
             
-            return Math.max(leftDepth, rightDepth) + 1;
-        };
+        //     return Math.min(leftDepth, rightDepth) + 1;
+        // };
     
-        return calcHeight(node);
-
-
-
+        // return calcDepth(node);
     }
 
     
@@ -331,4 +341,4 @@ prettyPrint(test.root)
 // test.postOrder(node => console.log('Visiting postOrder:', node.value))
 
 console.log(test.height(67))
-// 
+console.log(test.depth(7))
