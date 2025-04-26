@@ -268,38 +268,60 @@ class Tree {
     }
 
     // working on it
-    depth(value) {
+    depth(root, value) {
         
-        let depthLeft = 0;
-        let depthRight = 0;
+        if (!root) {
+            return -1
+        }
 
-        if (value === null) {
-            return 0;
-        } else if ()
+        let dist = -1
 
+        if (root.value === value || 
+            (dist = this.depth(root.left, value)) >= 0 ||
+            (dist = this.depth(root.right, value)) >= 0) {
+                return dist + 1
+            }
+ 
+        return dist
+
+       
+    }
+
+    isBalanced(root) {
         
-        // const node = this.root;
-        // const find = this.find(value)
-        // if (node === null) {
-        //     return null;
-        // }
-        
-        // const calcDepth = (node) => {
-        //     if (node === null) {
-        //         return -1;
-        //     } 
+        if (root === null) {
+            return true;
+        }
 
-        //     if (find === node) {
-        //         return + 1;
-        //     }
+        let lHeight = this.height(root.left);
+        let rHeight = this.height(root.right);
 
-        //     const rightDepth = calcDepth(node.right);
-        //     const leftDepth = calcDepth(node.left);
-            
-        //     return Math.min(leftDepth, rightDepth) + 1;
-        // };
-    
-        // return calcDepth(node);
+        if (Math.abs(lHeight - rHeight) > 1) {
+            return false
+        }
+
+        return this.isBalanced(root.left) && this.isBalanced(root.right)
+
+    }
+
+    rebalance() {
+        const values = [];
+
+        function inOrder(node) {
+            if (node === null) {
+                return;
+            } 
+
+            inOrder(node.left);
+            values.push(node.value)
+            inOrder(node.right)
+        }
+
+        inOrder(this.root)
+
+        const cleanArr = this._sortAndDedupe(values)
+
+        this.root = this.sortedArrToBST(cleanArr)
     }
 
     
@@ -318,20 +340,20 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     }
 };
 
+// INITIAL TESTS
+// const test = new Tree()
+// const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+// const sortedArr = test._sortAndDedupe(arr)
 
-const test = new Tree()
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-const sortedArr = test._sortAndDedupe(arr)
 
 
+// test.root = test.sortedArrToBST(sortedArr) 
 
-test.root = test.sortedArrToBST(sortedArr) 
-
-prettyPrint(test.root)
-test.insert(test.root, 30)
-prettyPrint(test.root)
-test.delete(test.root, 23)
-prettyPrint(test.root)
+// prettyPrint(test.root)
+// test.insert(test.root, 30)
+// prettyPrint(test.root)
+// test.delete(test.root, 23)
+// prettyPrint(test.root)
 // console.log(test.find(5))
 
 
@@ -340,5 +362,85 @@ prettyPrint(test.root)
 // test.inOrder(node => console.log('Visiting inOrder:', node.value))
 // test.postOrder(node => console.log('Visiting postOrder:', node.value))
 
-console.log(test.height(67))
-console.log(test.depth(7))
+// console.log(test.height(67))
+// console.log(test.depth(test.root, 324))
+// console.log(test.isBalanced(test.root))
+
+
+
+
+
+// === DRIVER SCRIPT ===
+
+// Helper function: generate an array of random numbers < 100
+function randomArray(size = 15, max = 100) {
+    return Array.from({ length: size }, () => Math.floor(Math.random() * max));
+}
+
+// 1. Create a Tree from a random array
+const tree = new Tree();
+const randomNums = randomArray(15); // 15 random numbers
+console.log("Random Numbers Generated:", randomNums);
+
+// Sort and dedupe the array
+const cleanNums = tree._sortAndDedupe(randomNums);
+
+// Build the tree
+tree.root = tree.buildTree(cleanNums, 0, cleanNums.length - 1);
+
+console.log("\nInitial Tree:");
+prettyPrint(tree.root);
+
+// 2. Confirm the tree is balanced
+console.log("\nIs the tree balanced?", tree.isBalanced(tree.root));
+
+// 3. Print out traversals
+console.log("\nLevel Order Traversal:");
+tree.levelOrder(node => console.log(node.value));
+
+console.log("\nPre-Order Traversal:");
+tree.preOrder(node => console.log(node.value));
+
+console.log("\nPost-Order Traversal:");
+tree.postOrder(node => console.log(node.value));
+
+console.log("\nIn-Order Traversal:");
+tree.inOrder(node => console.log(node.value));
+
+// 4. Unbalance the tree by inserting numbers > 100
+const bigNumbers = [120, 140, 160, 180, 200];
+console.log("\nInserting large numbers to unbalance:", bigNumbers);
+
+bigNumbers.forEach(num => {
+    tree.root = tree.insert(tree.root, num);
+});
+
+console.log("\nTree after inserting large numbers:");
+prettyPrint(tree.root);
+
+// 5. Confirm the tree is now unbalanced
+console.log("\nIs the tree balanced after insertions?", tree.isBalanced(tree.root));
+
+// 6. Rebalance the tree
+console.log("\nRebalancing the tree...");
+tree.rebalance();
+
+console.log("\nTree after rebalancing:");
+prettyPrint(tree.root);
+
+// 7. Confirm the tree is balanced again
+console.log("\nIs the tree balanced now?", tree.isBalanced(tree.root));
+
+// 8. Final Traversals
+console.log("\nFinal Level Order Traversal:");
+tree.levelOrder(node => console.log(node.value));
+
+console.log("\nFinal Pre-Order Traversal:");
+tree.preOrder(node => console.log(node.value));
+
+console.log("\nFinal Post-Order Traversal:");
+tree.postOrder(node => console.log(node.value));
+
+console.log("\nFinal In-Order Traversal:");
+tree.inOrder(node => console.log(node.value));
+
