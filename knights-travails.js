@@ -13,7 +13,19 @@ class Node {
 
 function knightMoves([startX, startY], [endX, endY]) {
     const startNode = new Node([startX, startY])
-    const endNode = new Node([endX, endY])  
+    const endNode = new Node([endX, endY])
+    const board = 8
+    
+    const possibleMoves = [
+        [2,1],
+        [2,-1],
+        [1,2],
+        [1,-2],
+        [-1,2],
+        [-1,-2],
+        [-2,-1],
+        [-2,1]
+    ]
     
 
       console.log(startNode,endNode)
