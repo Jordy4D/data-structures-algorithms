@@ -11,9 +11,9 @@ class Node {
 
 
 
-function knightMoves([xx, xy], [yx, yy]) {
-    const startNode = new Node([xx, xy])
-    const endNode = new Node([yx, yy])  
+function knightMoves([startX, startY], [endX, endY]) {
+    const startNode = new Node([startX, startY])
+    const endNode = new Node([endX, endY])  
     
 
       console.log(startNode,endNode)
