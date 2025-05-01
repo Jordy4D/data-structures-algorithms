@@ -4,7 +4,7 @@ class Node {
         this.y = y
         this.coord = [x, y]
         this.previousNode = null
-        this.nextNode = null
+        this.visited = false
     }
 }
 
@@ -28,8 +28,41 @@ function knightMoves([startX, startY], [endX, endY]) {
     ]
     
 
-      console.log(startNode,endNode)
+
+    const path = [startNode]
+
+    const visitedNodes = []
+
+    while (path.length > 0) {
+
+        const node = path.shift()
+
+        if (node === endNode) {
+            return path
+        }
+
+
+    }
+
+    // possibleMoves.forEach((pair) => {
+    //     let x = startX + pair[0]
+    //     let y = startY + pair[1]
+
+    //     let node = new Node([x, y])
+    //     node.previousNode = startNode
+        
+    //     results.push(node)
+
+    //     // if (x <= 7 && y <= 7) {
+            
+    //     // }
+    // })
+
+
+    // console.log(startNode,endNode)
+    console.log(results)
+
 }
 
 
-knightMoves([1,2],[3,3])
+knightMoves([4,5],[2,1])
